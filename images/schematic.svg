@@ -1,36 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 500" width="860" height="500" font-family="Segoe UI, Helvetica, Arial, sans-serif">
-<rect width="860" height="500" rx="10" fill="#ffffff"/>
-<polyline points="480,60 720,60" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<circle cx="480" cy="60" r="4" fill="#1d1d1f"/>
-<text xml:space="preserve" x="480" y="40" font-size="15" text-anchor="middle" fill="#1d1d1f" font-weight="bold" font-style="normal">+9 V</text>
-<text xml:space="preserve" x="480" y="22" font-size="12" text-anchor="middle" fill="#666" font-weight="normal" font-style="normal">battery +</text>
-<polyline points="480,60 480,72" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="480,72 489,79.16666666666667 471,93.5 489,107.83333333333334 471,122.16666666666667 489,136.5 471,150.83333333333334 480,158" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="480,158 480,170" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<text xml:space="preserve" x="455" y="120" font-size="14" text-anchor="end" fill="#1d1d1f" font-weight="normal" font-style="normal">10k</text>
-<polyline points="720,60 720,265" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="705,265 735,265" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M705,281 Q720,273 735,281" fill="none" stroke="#1d1d1f" stroke-width="3"/>
-<polyline points="720,278 720,430 480,430" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<text xml:space="preserve" x="704" y="262" font-size="16" text-anchor="end" fill="#1d1d1f" font-weight="bold" font-style="normal">+</text>
-<text xml:space="preserve" x="704" y="296" font-size="16" text-anchor="end" fill="#1d1d1f" font-weight="bold" font-style="normal">–</text>
-<text xml:space="preserve" x="742" y="266" font-size="14" text-anchor="start" fill="#1d1d1f" font-weight="normal" font-style="normal">1 µF</text>
-<text xml:space="preserve" x="742" y="284" font-size="12" text-anchor="start" fill="#666" font-weight="normal" font-style="normal">rail cap</text>
-<text xml:space="preserve" x="742" y="300" font-size="12" text-anchor="start" fill="#666" font-weight="normal" font-style="normal">– to pin 3 / GND</text>
-<circle cx="480" cy="170" r="4" fill="#1d1d1f"/>
-<polyline points="480,170 598,170" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<circle cx="610" cy="170" r="9" fill="#fff" stroke="#1d1d1f" stroke-width="2.5"/>
-<text xml:space="preserve" x="594" y="166" font-size="15" text-anchor="end" fill="#1d1d1f" font-weight="bold" font-style="normal"></text>
-<text xml:space="preserve" x="594" y="184" font-size="12" text-anchor="end" fill="#666" font-weight="normal" font-style="normal"></text>
-<text xml:space="preserve" x="628" y="166" font-size="15" text-anchor="start" fill="#1d1d1f" font-weight="bold" font-style="normal">OUT</text>
-<text xml:space="preserve" x="628" y="184" font-size="12" text-anchor="start" fill="#666" font-weight="normal" font-style="normal">to amp</text>
-<polyline points="480,170 480,300" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" width="860" height="520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="860" height="520" rx="10" fill="#ffffff"/>
+<circle cx="480" cy="40" r="4" fill="#1d1d1f"/>
+<text xml:space="preserve" x="494" y="36" font-size="15" text-anchor="start" fill="#1d1d1f" font-weight="bold">+9 V</text>
+<text xml:space="preserve" x="538" y="36" font-size="12" text-anchor="start" fill="#666" font-weight="normal">(battery +, VCC)</text>
+<polyline points="480,40 480,50" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="480,50 489,54.166666666666664 471,62.5 489,70.83333333333334 471,79.16666666666667 489,87.5 471,95.83333333333334 480,100" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="480,100 480,110" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text xml:space="preserve" x="458" y="80" font-size="14" text-anchor="end" fill="#1d1d1f" font-weight="normal">10k</text>
+<polyline points="480,110 480,300" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="480" cy="130" r="4" fill="#1d1d1f"/>
+<polyline points="480,130 300,130" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="404,120 404,140 387,130" fill="#1d1d1f"/>
+<polyline points="386,120 386,140" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="480" cy="165" r="4" fill="#1d1d1f"/>
+<polyline points="480,165 300,165" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="404,155 404,175 387,165" fill="#1d1d1f"/>
+<polyline points="386,155 386,175" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="300" cy="165" r="4" fill="#1d1d1f"/>
+<text xml:space="preserve" x="352" y="124" font-size="12" text-anchor="middle" fill="#666" font-weight="normal">D1</text>
+<text xml:space="preserve" x="352" y="159" font-size="12" text-anchor="middle" fill="#666" font-weight="normal">D2</text>
+<text xml:space="preserve" x="288" y="150" font-size="13" text-anchor="end" fill="#1d1d1f" font-weight="normal">1N4148 ×2</text>
+<text xml:space="preserve" x="288" y="166" font-size="12" text-anchor="end" fill="#666" font-weight="normal">side by side</text>
+<circle cx="480" cy="235" r="4" fill="#1d1d1f"/>
+<polyline points="480,235 555,235" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="555,220 555,250" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="565,220 565,250" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="565,235 660,235" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="660" cy="235" r="4" fill="#1d1d1f"/>
+<text xml:space="preserve" x="560" y="212" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal">1 nF</text>
+<text xml:space="preserve" x="560" y="270" font-size="12" text-anchor="middle" fill="#666" font-weight="normal">102K63</text>
+<polyline points="660,235 728,235" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="740" cy="235" r="9" fill="#fff" stroke="#1d1d1f" stroke-width="2.5"/>
+<text xml:space="preserve" x="756" y="231" font-size="15" text-anchor="start" fill="#1d1d1f" font-weight="bold">OUT</text>
+<text xml:space="preserve" x="756" y="249" font-size="12" text-anchor="start" fill="#666" font-weight="normal">to amp</text>
+<polyline points="660,235 660,200 488,200" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M472,200 A8,8 0 0 1 488,200" fill="none" stroke="#1d1d1f" stroke-width="2"/>
+<polyline points="472,200 300,200" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="300" cy="200" r="4" fill="#1d1d1f"/>
+<polygon points="404,190 404,210 387,200" fill="#1d1d1f"/>
+<polyline points="386,190 386,210" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<text xml:space="preserve" x="395" y="222" font-size="12" text-anchor="middle" fill="#666" font-weight="normal">D3  1N4148</text>
+<polyline points="300,130 300,282" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="455" cy="320" r="78" fill="none" stroke="#999" stroke-width="1.5" stroke-dasharray="5 4"/>
-<text xml:space="preserve" x="388" y="408" font-size="13" text-anchor="end" fill="#666" font-weight="normal" font-style="normal">MPSA13</text>
-<text xml:space="preserve" x="388" y="424" font-size="12" text-anchor="end" fill="#666" font-weight="normal" font-style="normal">(Darlington)</text>
 <polyline points="400,262 400,302" fill="none" stroke="#1d1d1f" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="400,272 425,252" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="425,252 480,252" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="400,272 425,252 480,252" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="480" cy="252" r="4" fill="#1d1d1f"/>
 <polyline points="400,292 425,312" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <polygon points="425.0,312.0 415.4,309.3 420.2,303.2" fill="#1d1d1f"/>
@@ -39,58 +52,53 @@
 <polyline points="445,332 480,312 480,300" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="445,352 480,372" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <polygon points="480.0,372.0 470.1,370.8 473.9,364.0" fill="#1d1d1f"/>
-<polyline points="480,372 480,430" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<circle cx="480" cy="430" r="4" fill="#1d1d1f"/>
-<polyline points="480,430 480,440" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="466,440 494,440" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="471,446 489,446" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="476,452 484,452" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<text xml:space="preserve" x="492" y="240" font-size="12" text-anchor="start" fill="#c0392b" font-weight="normal" font-style="normal">1 C</text>
-<text xml:space="preserve" x="392" y="272" font-size="12" text-anchor="end" fill="#c0392b" font-weight="normal" font-style="normal">2 B</text>
-<text xml:space="preserve" x="492" y="410" font-size="12" text-anchor="start" fill="#c0392b" font-weight="normal" font-style="normal">3 E</text>
+<text xml:space="preserve" x="488" y="284" font-size="12" text-anchor="start" fill="#c0392b" font-weight="normal">1 C</text>
+<text xml:space="preserve" x="392" y="272" font-size="12" text-anchor="end" fill="#c0392b" font-weight="normal">2 B</text>
+<text xml:space="preserve" x="492" y="408" font-size="12" text-anchor="start" fill="#c0392b" font-weight="normal">3 E</text>
+<text xml:space="preserve" x="395" y="412" font-size="13" text-anchor="end" fill="#666" font-weight="normal">MPSA13</text>
+<text xml:space="preserve" x="395" y="428" font-size="12" text-anchor="end" fill="#666" font-weight="normal">(Darlington)</text>
 <polyline points="300,282 400,282" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="300" cy="282" r="4" fill="#1d1d1f"/>
-<polyline points="480,170 440,170" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="440,170 300,170" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polygon points="404,160 404,180 387,170" fill="#1d1d1f"/>
-<polyline points="386,160 386,180" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-<polygon points="354,160 354,180 337,170" fill="#1d1d1f"/>
-<polyline points="336,160 336,180" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-<text xml:space="preserve" x="370" y="150" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal" font-style="normal">2 × 1N4148</text>
-<circle cx="480" cy="215" r="4" fill="#1d1d1f"/>
-<polyline points="480,215 437,215" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="427,200 427,230" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="437,200 437,230" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="427,215 300,215" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polygon points="369,205 369,225 352,215" fill="#1d1d1f"/>
-<polyline points="351,205 351,225" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-<text xml:space="preserve" x="418" y="197" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal" font-style="normal">1 nF (102K63)</text>
-<text xml:space="preserve" x="360" y="244" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal" font-style="normal">1N4148</text>
-<polyline points="300,170 300,282" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<circle cx="300" cy="215" r="4" fill="#1d1d1f"/>
 <polyline points="300,282 236,282" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M216,267 Q223,282 216,297" fill="none" stroke="#1d1d1f" stroke-width="3"/>
 <polyline points="231,267 231,297" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="221,282 120,282" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<text xml:space="preserve" x="232" y="262" font-size="16" text-anchor="start" fill="#1d1d1f" font-weight="bold" font-style="normal">+</text>
-<text xml:space="preserve" x="212" y="262" font-size="16" text-anchor="end" fill="#1d1d1f" font-weight="bold" font-style="normal">–</text>
-<text xml:space="preserve" x="226" y="318" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal" font-style="normal">2.2 µF</text>
-<text xml:space="preserve" x="226" y="334" font-size="12" text-anchor="middle" fill="#666" font-weight="normal" font-style="normal">+ to the base</text>
+<text xml:space="preserve" x="234" y="262" font-size="16" text-anchor="start" fill="#1d1d1f" font-weight="bold">+</text>
+<text xml:space="preserve" x="212" y="262" font-size="16" text-anchor="end" fill="#1d1d1f" font-weight="bold">–</text>
+<text xml:space="preserve" x="200" y="318" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal">2.2 µF  (m 2u2 50v)</text>
+<text xml:space="preserve" x="200" y="334" font-size="12" text-anchor="middle" fill="#666" font-weight="normal">+ should face the base</text>
 <circle cx="110" cy="282" r="9" fill="#fff" stroke="#1d1d1f" stroke-width="2.5"/>
-<text xml:space="preserve" x="94" y="278" font-size="15" text-anchor="end" fill="#1d1d1f" font-weight="bold" font-style="normal">IN</text>
-<text xml:space="preserve" x="94" y="296" font-size="12" text-anchor="end" fill="#666" font-weight="normal" font-style="normal">guitar / violin</text>
+<text xml:space="preserve" x="94" y="278" font-size="15" text-anchor="end" fill="#1d1d1f" font-weight="bold">IN</text>
+<text xml:space="preserve" x="94" y="296" font-size="12" text-anchor="end" fill="#666" font-weight="normal">guitar / violin</text>
 <polyline points="300,282 300,340" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="285,340 315,340" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="285,350 315,350" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="300,350 300,420" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="300,420 300,430" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="286,430 314,430" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="291,436 309,436" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<polyline points="296,442 304,442" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<text xml:space="preserve" x="324" y="350" font-size="13" text-anchor="start" fill="#1d1d1f" font-weight="normal" font-style="normal">330 nF</text>
-<text xml:space="preserve" x="324" y="366" font-size="12" text-anchor="start" fill="#666" font-weight="normal" font-style="normal">(334)</text>
-<text xml:space="preserve" x="40" y="446" font-size="12" text-anchor="start" fill="#555" font-weight="normal" font-style="normal">Diode stripes (cathodes) face the base.</text>
-<text xml:space="preserve" x="40" y="462" font-size="12" text-anchor="start" fill="#555" font-weight="normal" font-style="normal">MPSA13 pins seen from the round side: 1 collector, 2 base, 3 emitter.</text>
-<text xml:space="preserve" x="40" y="478" font-size="12" text-anchor="start" fill="#555" font-weight="normal" font-style="normal">Jack sleeves and battery – go to ground. No output cap: the output sits at about +1.4 V DC.</text>
-<text xml:space="preserve" x="836" y="486" font-size="11" text-anchor="end" fill="#888" font-weight="normal" font-style="normal">Buzz Fuzz  ·  Farica☆Kimora  (c) Cursed Entertainment</text>
+<polyline points="300,350 300,440" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="300,440 300,450" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="286,450 314,450" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="291,456 309,456" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="296,462 304,462" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text xml:space="preserve" x="324" y="350" font-size="13" text-anchor="start" fill="#1d1d1f" font-weight="normal">330 nF</text>
+<text xml:space="preserve" x="324" y="366" font-size="12" text-anchor="start" fill="#666" font-weight="normal">(334)</text>
+<polyline points="480,372 480,440" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="480" cy="415" r="4" fill="#1d1d1f"/>
+<polyline points="480,440 480,450" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="466,450 494,450" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="471,456 489,456" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="476,462 484,462" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="480,415 600,415 600,405" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="585,405 615,405" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M585,421 Q600,413 615,421" fill="none" stroke="#1d1d1f" stroke-width="3"/>
+<polyline points="600,418 600,440" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="600,440 600,450" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="586,450 614,450" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="591,456 609,456" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="596,462 604,462" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text xml:space="preserve" x="586" y="402" font-size="15" text-anchor="end" fill="#1d1d1f" font-weight="bold">+</text>
+<text xml:space="preserve" x="622" y="400" font-size="13" text-anchor="start" fill="#1d1d1f" font-weight="normal">3.3 µF</text>
+<text xml:space="preserve" x="622" y="416" font-size="12" text-anchor="start" fill="#666" font-weight="normal">pin 3 to battery –, beside the wire</text>
+<text xml:space="preserve" x="622" y="431" font-size="12" text-anchor="start" fill="#666" font-weight="normal">(across +9 V it would smooth the battery)</text>
+<text xml:space="preserve" x="30" y="482" font-size="12" text-anchor="start" fill="#555" font-weight="normal">Diode stripes face the base. MPSA13 pins from the round side: 1 collector, 2 base, 3 emitter.</text>
+<text xml:space="preserve" x="30" y="498" font-size="12" text-anchor="start" fill="#555" font-weight="normal">Battery – is the ground rail; jack sleeves to ground. The 1 nF is the output cap, so only the buzzy top end gets through.</text>
+<text xml:space="preserve" x="840" y="514" font-size="11" text-anchor="end" fill="#888" font-weight="normal">Buzz Fuzz  ·  Farica☆Kimora  (c) Cursed Entertainment</text>
 </svg>

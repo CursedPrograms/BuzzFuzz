@@ -4,14 +4,14 @@ import sys
 
 import numpy as np
 
-spice = np.loadtxt(sys.argv[1])          # wrdata: t v(in) t v(b) t v(c)
-solver = np.loadtxt(sys.argv[2])         # t v(in) v(b) v(c)
+spice = np.loadtxt(sys.argv[1])          # wrdata: t v(in) t v(b) t v(c) t v(out)
+solver = np.loadtxt(sys.argv[2])         # t v(in) v(b) v(c) v(out)
 t = solver[:, 0]
-names = ["v(in)", "v(b)", "v(c)"]
-cols = [(0, 1), (2, 3), (4, 5)]
+names = ["v(in)", "v(b)", "v(c)", "v(out)"]
+cols = [(0, 1), (2, 3), (4, 5), (6, 7)]
 
 skip = t > 0.1                            # let both settle
-for name, (tc, vc), k in zip(names, cols, (1, 2, 3)):
+for name, (tc, vc), k in zip(names, cols, (1, 2, 3, 4)):
     ref = np.interp(t, spice[:, tc], spice[:, vc])
     ours = solver[:, k]
     swing = ref[skip] - ref[skip].mean()

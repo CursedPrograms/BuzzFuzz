@@ -8,10 +8,9 @@
 Vin src 0 SIN(0 {amp} {freq})
 Rsrc src in 10k
 
-* battery with internal resistance + the 1uF rail cap
+* battery with internal resistance (the 3.3uF on the board has both legs on ground: left out)
 Vbat bat 0 9
 Rbat bat vcc 2
-Crail vcc 0 1u
 
 Rc vcc c 10k
 Cin in b 2.2u
@@ -19,12 +18,14 @@ Cbe b 0 330n
 Q1 c b e1 QHALF
 Q2 c e1 0 QHALF
 
-D1 c d12 D1N4148S
-D2 d12 b D1N4148S
-Chp c x 1n
-D3 x b D1N4148S
+* two diodes side by side, collector to base
+D1 c b D1N4148S
+D2 c b D1N4148S
+* 102K63 to the output jack, a third diode from there back to the base
+Cout c out 1n
+D3 out b D1N4148S
 
-Rload c 0 1meg
+Rload out 0 1meg
 
 .model QHALF NPN(IS=1e-14 BF=120 BR=0.74)
 .model D1N4148S D(IS=2.52n N=1.752)
@@ -32,8 +33,8 @@ Rload c 0 1meg
 .options gmin=1e-12 reltol=1e-6 vntol=1e-8 abstol=1e-13
 .control
 op
-print v(b) v(c) v(e1) v(vcc)
+print v(b) v(c) v(out) v(e1) v(vcc)
 tran 5.2083u 0.5 0 5.2083u
-wrdata spice_out.csv v(in) v(b) v(c)
+wrdata spice_out.csv v(in) v(b) v(c) v(out)
 .endc
 .end

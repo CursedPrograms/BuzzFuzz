@@ -8,8 +8,7 @@ BuzzFuzz::BuzzFuzz (const Settings& s)
     collector = c.addNode ("c");
     rail = c.addNode ("vcc");
     const auto darlington = c.addNode ("e1");     // emitter of the first transistor inside the MPSA13
-    const auto between = c.addNode ("d12");       // between the two bias diodes
-    const auto hiPass = c.addNode ("x");          // between the 1 nF and its diode
+    output = c.addNode ("out");                   // after the 1 nF: the output jack
 
     const Circuit::DiodeModel d1n4148;
     const Circuit::BjtModel half;                 // each half of the Darlington
@@ -17,7 +16,7 @@ BuzzFuzz::BuzzFuzz (const Settings& s)
     input = c.addSource (in, 0.0, s.sourceOhms);
     battery = c.addSource (rail, s.batteryVolts, s.batteryOhms);
     if (s.railCap)
-        c.addCapacitor (rail, 0, 1e-6);
+        c.addCapacitor (rail, 0, 3.3e-6);
 
     c.addResistor (rail, collector, 10e3);
     c.addCapacitor (in, base, 2.2e-6);
@@ -25,10 +24,10 @@ BuzzFuzz::BuzzFuzz (const Settings& s)
     c.addNpn (collector, base, darlington, half);
     c.addNpn (collector, darlington, 0, half);
 
-    c.addDiode (collector, between, d1n4148);
-    c.addDiode (between, base, d1n4148);
-    c.addCapacitor (collector, hiPass, 1e-9);
-    c.addDiode (hiPass, base, d1n4148);
+    c.addDiode (collector, base, d1n4148);        // two side by side
+    c.addDiode (collector, base, d1n4148);
+    c.addCapacitor (collector, output, 1e-9);     // 102K63
+    c.addDiode (output, base, d1n4148);
 
-    c.addResistor (collector, 0, 1e6);            // the amp's input
+    c.addResistor (output, 0, 1e6);               // the amp's input
 }
