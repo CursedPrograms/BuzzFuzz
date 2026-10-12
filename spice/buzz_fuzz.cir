@@ -1,0 +1,39 @@
+* The 2014 breadboard fuzz - reference for the real-time solver
+* Same simplified models as Source/circuit (models.lib has the full ones for comparison).
+* Run: ngspice -b buzz_fuzz.cir   (writes spice_out.csv)
+
+.param amp=0.1 freq=196
+
+* input: a sine through the pickup's resistance
+Vin src 0 SIN(0 {amp} {freq})
+Rsrc src in 10k
+
+* battery with internal resistance + the 1uF rail cap
+Vbat bat 0 9
+Rbat bat vcc 2
+Crail vcc 0 1u
+
+Rc vcc c 10k
+Cin in b 2.2u
+Cbe b 0 330n
+Q1 c b e1 QHALF
+Q2 c e1 0 QHALF
+
+D1 c d12 D1N4148S
+D2 d12 b D1N4148S
+Chp c x 1n
+D3 x b D1N4148S
+
+Rload c 0 1meg
+
+.model QHALF NPN(IS=1e-14 BF=120 BR=0.74)
+.model D1N4148S D(IS=2.52n N=1.752)
+
+.options gmin=1e-12 reltol=1e-6 vntol=1e-8 abstol=1e-13
+.control
+op
+print v(b) v(c) v(e1) v(vcc)
+tran 5.2083u 0.5 0 5.2083u
+wrdata spice_out.csv v(in) v(b) v(c)
+.endc
+.end
