@@ -12,16 +12,13 @@
 //      IN ── (source R) ── 2.2uF ────────────────────────────────────────┼── base
 //                                                                      330nF
 //                                                                       GND ── emitter
-//
-// The 3.3 uF on the board sits with both legs on ground (+ on pin 3, - on the ground rail), so
-// it does nothing; the railCap setting puts one across the battery instead, as a what-if.
+
 struct BuzzFuzz
 {
     struct Settings
     {
         double batteryVolts = 9.0;
         double batteryOhms = 2.0;         // fresh 9 V; old ones climb to tens of ohms
-        bool railCap = false;             // what-if: a 3.3 uF across the battery
         double sourceOhms = 10000.0;      // what's driving the input (pickup)
     };
 

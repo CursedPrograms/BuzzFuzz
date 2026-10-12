@@ -15,8 +15,6 @@ BuzzFuzz::BuzzFuzz (const Settings& s)
 
     input = c.addSource (in, 0.0, s.sourceOhms);
     battery = c.addSource (rail, s.batteryVolts, s.batteryOhms);
-    if (s.railCap)
-        c.addCapacitor (rail, 0, 3.3e-6);
 
     c.addResistor (rail, collector, 10e3);
     c.addCapacitor (in, base, 2.2e-6);

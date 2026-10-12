@@ -2,8 +2,7 @@
 
 A real-time circuit emulation of a fuzz pedal first built on a breadboard in 2014: one MPSA13
 Darlington transistor as a common-emitter amp, with 1N4148 diodes in the feedback clipping it
-(the Bazz Fuss family, plus the diodes added "till it sounded right" and a 3.3 µF cap that made it
-louder and steadier).
+(the Bazz Fuss family, plus the diodes added "till it sounded right").
 
 Farica☆Kimora  (c) Cursed Entertainment
 
@@ -23,8 +22,8 @@ Wired like this on the board (MPSA13 pins seen from the round side):
 | **Pin 1** (collector) | 10k, D1, D2 (plain ends), 102K63 |
 | **Output jack** | 102K63, D3 (plain end) |
 | **Pin 2** (base) | D1, D2, D3 (stripe ends), 334 (330 nF), 2.2 µF − |
-| **Pin 3** (emitter) | 334, 3.3 µF +, wire to ground |
-| **Ground** (battery −) | 3.3 µF −, jack sleeves |
+| **Pin 3** (emitter) | 334, ground |
+| **Ground** (battery −) | pin 3, jack sleeves |
 | **Input jack** | 2.2 µF + |
 
 - **D1 and D2 side by side** from collector to base set the bias: the collector sits one diode
@@ -35,12 +34,6 @@ Wired like this on the board (MPSA13 pins seen from the round side):
 - **The 2.2 µF ("m 2u2 50v": 2.2 µF, ±20 %, 50 V)** is in with its − on the base. The base sits at
   about +1.2 V and the jack at 0 V, so + should face the base. It has survived because 1.2 V of
   reverse voltage is gentle; flip it on a new build.
-- **The 3.3 µF** runs from pin 3 to battery −, beside the wire that already joins them, so on paper
-  both legs are on ground and it does nothing. It did make a difference on the board, though. The
-  likely reason is the ground wire or a joint not being perfect: then the cap is what really
-  carries the signal current from the emitter to battery −, and the pedal gets louder and steadier.
-  Across the battery (+ on VCC, − on ground) it would do the other job, smoothing the 9 V like a
-  brownout cap on a robot. The model can do that as a what-if (`railCap`).
 
 ## The solver
 `Source/circuit` is a small modified-nodal-analysis solver (Newton iterations, trapezoidal

@@ -8,7 +8,7 @@
 Vin src 0 SIN(0 {amp} {freq})
 Rsrc src in 10k
 
-* battery with internal resistance (the 3.3uF on the board has both legs on ground: left out)
+* battery with internal resistance
 Vbat bat 0 9
 Rbat bat vcc 2
 
