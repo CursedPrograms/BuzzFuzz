@@ -23,7 +23,7 @@ See [TODO.md](TODO.md).
   OUT jack ─────────────────────┤ collector (pin 1)
                                 │
                   ┌──|◄──|◄─────┤   2× 1N4148 in series, stripes toward the base
-                  ├──|◄──┤├─────┘   1N4148 + 1nF (grey, 102)
+                  ├──|◄──┤├─────┘   1N4148 + 1nF (grey 102K63)
                   │
   IN jack ── –┤├+ ┴─────────────── base (pin 2)       MPSA13 Darlington
           2.2µF   │                                   pins from the round side
@@ -38,6 +38,8 @@ See [TODO.md](TODO.md).
   survived, but a new build should flip it.)
 - No output cap: the output sits at about +1.4 V DC, harmless into an amp but it can pop when
   you plug in. A 100 nF-1 µF cap in series with the output jack fixes that.
+- The grey 1 nF is marked 102K63: 10 x 10^2 pF = 1000 pF = 1 nF, K = ±10 %, 63 V. The model uses
+  exactly 1 nF; a real one can be anywhere from 0.9 to 1.1 nF.
 - Jack sleeves and the battery's minus go to ground.
 
 ## The solver

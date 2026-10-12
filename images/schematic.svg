@@ -64,7 +64,7 @@
 <polyline points="427,215 300,215" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <polygon points="369,205 369,225 352,215" fill="#1d1d1f"/>
 <polyline points="351,205 351,225" fill="none" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-<text xml:space="preserve" x="432" y="197" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal" font-style="normal">1 nF</text>
+<text xml:space="preserve" x="418" y="197" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal" font-style="normal">1 nF (102K63)</text>
 <text xml:space="preserve" x="360" y="244" font-size="13" text-anchor="middle" fill="#1d1d1f" font-weight="normal" font-style="normal">1N4148</text>
 <polyline points="300,170 300,282" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="300" cy="215" r="4" fill="#1d1d1f"/>
