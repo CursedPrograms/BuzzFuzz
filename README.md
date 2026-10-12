@@ -11,10 +11,32 @@ Farica☆Kimora  (c) Cursed Entertainment
 See [TODO.md](TODO.md).
 
 ## The circuit
-- +9 V → 10k → collector; emitter to ground
-- input → 2.2 µF electrolytic → base; 330 nF (334) from base to ground
-- 2 × 1N4148 from collector to base, plus 1 nF in series with another 1N4148
-- output straight from the collector; 1 µF across the battery
+![Buzz Fuzz schematic](images/schematic.svg)
+
+```
+                          +9V ──┬────────┐
+                                │      1µF   (rail cap)
+                               10k       │
+                                │       GND
+  OUT jack ─────────────────────┤ collector (pin 1)
+                                │
+                  ┌──►|──►|─────┤   2× 1N4148 in series, stripes toward the base
+                  ├──►|──┤├─────┘   1N4148 + 1nF (grey, 102)
+                  │
+  IN jack ── –┤├+ ┴─────────────── base (pin 2)       MPSA13 Darlington
+          2.2µF   │                                   pins from the round side
+                330nF (blue, 334)                    1 C · 2 B · 3 E
+                  │
+                 GND ───────────── emitter (pin 3)
+```
+(read the diodes right to left: anode at the collector, stripe at the base)
+
+- The 2.2 µF's **+ leg goes to the base**: the base sits at about +1.2 V, the jack at 0 V.
+  (The 2014 build has it the other way round; 1.2 V of reverse voltage is small enough that it
+  survived, but a new build should flip it.)
+- No output cap: the output sits at about +1.4 V DC, harmless into an amp but it can pop when
+  you plug in. A 100 nF-1 µF cap in series with the output jack fixes that.
+- Jack sleeves and the battery's minus go to ground.
 
 ## The solver
 `Source/circuit` is a small modified-nodal-analysis solver (Newton iterations, trapezoidal
