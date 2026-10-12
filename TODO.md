@@ -6,7 +6,7 @@ feedback clipping. The real-time circuit solver (`Source/circuit`) matches ngspi
 
 ## Done (v0.1.0)
 - [x] Plugin: VST3 + standalone with ASIO; INPUT, BATTERY (fresh to dying), VOLUME
-- [x] D1 / D3 diode pickers (silicon, germanium, Schottky, LEDs, pulled out); D2 stays a 1N4148
+- [x] D1 / D2 / D3 diode pickers (silicon, germanium, Schottky, LEDs, pulled out)
 - [x] The schematic is the skin; diodes glow while they conduct
 - [x] pluginval strictness 10
 
@@ -22,4 +22,4 @@ feedback clipping. The real-time circuit solver (`Source/circuit`) matches ngspi
 - [ ] Solderless: wire your own parts on a virtual breadboard, on top of the same solver.
 
 ## Credits
-Farica☆Kimora  (c) Cursed Entertainment - in the plugin, README and LICENSE.
+Farica☆Kimora © Cursed Entertainment - in the plugin, README and LICENSE.

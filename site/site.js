@@ -32,7 +32,7 @@ const turnOn = (d) => (d.is > 0 ? d.n * VT * Math.log(1e-3 / d.is + 1) : null); 
 function note(d) {
   const vf = turnOn(d);
   if (vf === null) return "An empty hole: that spot does nothing.";
-  if (vf > 1.0) return "Never gets enough voltage here: stays dark, like an empty hole.";
+  if (vf > 1.0) return "Dark next to a silicon diode or in D3; in D1 and D2 together it carries the bias and lights up.";
   if (vf < 0.4) return "Turns on early: squashes harder, and leaks a little.";
   return d.name === "1N4148" ? "The original." : "Close to the original.";
 }

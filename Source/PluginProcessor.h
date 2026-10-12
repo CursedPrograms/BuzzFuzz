@@ -9,7 +9,7 @@
 //            gives 0.1-1 V; a mic preamp often far less, so a voice wants +18 dB or more)
 //   BATTERY  fresh 9 V to a dying one (lower voltage, more internal resistance)
 //   VOLUME   what reaches the amp: 0 dB = 1 V at the output jack is full scale
-//   D1, D3   which diode sits in those two spots (D2 stays a 1N4148)
+//   D1-D3    which diode sits in each spot (pull D1 and D2 out and nothing biases the transistor)
 //   BYPASS   true bypass (the clean signal, delayed to line up); MUTE: silence
 class Fuzz14Processor : public juce::AudioProcessor
 {
@@ -62,10 +62,11 @@ private:
     std::atomic<float>* batteryParam = nullptr;
     std::atomic<float>* volumeParam = nullptr;
     std::atomic<float>* d1Param = nullptr;
+    std::atomic<float>* d2Param = nullptr;
     std::atomic<float>* d3Param = nullptr;
     std::atomic<float>* bypassParam = nullptr;
     std::atomic<float>* muteParam = nullptr;
-    int d1Type = 0, d3Type = 0;
+    int d1Type = 0, d2Type = 0, d3Type = 0;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Fuzz14Processor)
 };

@@ -26,6 +26,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout createLayout()
                                                      juce::NormalisableRange<float> (-36.0f, 12.0f, 0.1f), 0.0f,
                                                      juce::AudioParameterFloatAttributes().withStringFromValueFunction (db)),
         std::make_unique<juce::AudioParameterChoice> (juce::ParameterID { "d1", 1 }, "D1", diodeNames(), 0),
+        std::make_unique<juce::AudioParameterChoice> (juce::ParameterID { "d2", 1 }, "D2", diodeNames(), 0),
         std::make_unique<juce::AudioParameterChoice> (juce::ParameterID { "d3", 1 }, "D3", diodeNames(), 0),
         std::make_unique<juce::AudioParameterBool> (juce::ParameterID { "bypass", 1 }, "Bypass", false),
         std::make_unique<juce::AudioParameterBool> (juce::ParameterID { "mute", 1 }, "Mute", false),
@@ -49,6 +50,7 @@ Fuzz14Processor::Fuzz14Processor()
     batteryParam = params.getRawParameterValue ("battery");
     volumeParam = params.getRawParameterValue ("volume");
     d1Param = params.getRawParameterValue ("d1");
+    d2Param = params.getRawParameterValue ("d2");
     d3Param = params.getRawParameterValue ("d3");
     bypassParam = params.getRawParameterValue ("bypass");
     muteParam = params.getRawParameterValue ("mute");
@@ -75,8 +77,10 @@ void Fuzz14Processor::prepareToPlay (double sampleRate, int maxBlockSize)
     setLatencySamples (juce::roundToInt (oversampling->getLatencyInSamples()));
 
     d1Type = (int) d1Param->load();
+    d2Type = (int) d2Param->load();
     d3Type = (int) d3Param->load();
     fuzz.circuit.setDiode (fuzz.d1, diodeTypes()[(size_t) d1Type].model);
+    fuzz.circuit.setDiode (fuzz.d2, diodeTypes()[(size_t) d2Type].model);
     fuzz.circuit.setDiode (fuzz.d3, diodeTypes()[(size_t) d3Type].model);
 
     battery.reset (sampleRate, 0.3);
@@ -134,6 +138,8 @@ void Fuzz14Processor::processBlock (juce::AudioBuffer<float>& buffer, juce::Midi
     // swap a diode, like pulling one out of the breadboard and pushing another in
     if (const auto t = (int) d1Param->load(); t != d1Type)
         fuzz.circuit.setDiode (fuzz.d1, diodeTypes()[(size_t) (d1Type = t)].model);
+    if (const auto t = (int) d2Param->load(); t != d2Type)
+        fuzz.circuit.setDiode (fuzz.d2, diodeTypes()[(size_t) (d2Type = t)].model);
     if (const auto t = (int) d3Param->load(); t != d3Type)
         fuzz.circuit.setDiode (fuzz.d3, diodeTypes()[(size_t) (d3Type = t)].model);
 

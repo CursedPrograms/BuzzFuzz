@@ -87,5 +87,5 @@
 <polyline points="476,462 484,462" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <text xml:space="preserve" x="30" y="482" font-size="12" text-anchor="start" fill="#555" font-weight="normal">Diode stripes face the base. MPSA13 pins from the round side: 1 collector, 2 base, 3 emitter.</text>
 <text xml:space="preserve" x="30" y="498" font-size="12" text-anchor="start" fill="#555" font-weight="normal">Battery – is the ground rail; jack sleeves to ground. The 1 nF is the output cap, so only the buzzy top end gets through.</text>
-<text xml:space="preserve" x="840" y="514" font-size="11" text-anchor="end" fill="#888" font-weight="normal">Fuzz14  ·  Farica☆Kimora  (c) Cursed Entertainment</text>
+<text xml:space="preserve" x="840" y="514" font-size="11" text-anchor="end" fill="#888" font-weight="normal">Fuzz14  ·  Farica☆Kimora © Cursed Entertainment</text>
 </svg>

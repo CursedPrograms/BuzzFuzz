@@ -97,7 +97,7 @@ notes = ['Diode stripes face the base. MPSA13 pins from the round side: 1 collec
          'Battery – is the ground rail; jack sleeves to ground. The 1 nF is the output cap, so only the buzzy top end gets through.']
 for i, n in enumerate(notes): T(30, 482 + i * 16, n, 12, 'start', c='#555')
 if not skin:
-    T(W - 20, H - 6, 'Fuzz14  ·  Farica☆Kimora  (c) Cursed Entertainment', 11, 'end', c='#888')
+    T(W - 20, H - 6, 'Fuzz14  ·  Farica☆Kimora © Cursed Entertainment', 11, 'end', c='#888')
 
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="Segoe UI, Helvetica, Arial, sans-serif">
 <rect width="{W}" height="{H}" rx="10" fill="#ffffff"/>

@@ -4,11 +4,13 @@ A real-time circuit emulation of a fuzz pedal first built on a breadboard in 201
 Darlington transistor as a common-emitter amp, with 1N4148 diodes in the feedback clipping it
 (the Bazz Fuss family, plus the diodes added "till it sounded right").
 
-Farica☆Kimora  (c) Cursed Entertainment
+[Farica☆Kimora](https://github.com/Farica-Kimora) © Cursed Entertainment
 
 A VST3 plugin and standalone app (with ASIO) for Windows, for guitar or electric violin. The
-window is the schematic: the knobs sit next to the parts they belong to, and the diodes glow red
+window is the schematic: the knobs sit next to the parts they belong to, and the diodes glow
 while they conduct.
+
+**Website:** https://cursedprograms.github.io/Fuzz14/ &middot; **Download:** [latest release](https://github.com/CursedPrograms/Fuzz14/releases/latest)
 
 ![Fuzz14](images/fuzz14.png)
 
@@ -19,8 +21,12 @@ while they conduct.
   red as you drive it.
 - **BATTERY** - a fresh 9 V down to a dying 6 V, with the internal resistance climbing as it goes.
 - **VOLUME** - what reaches the amp.
-- **D1 and D3** - swap the diode in those spots while you play, like pulling one out of the
-  breadboard and pushing another in. D2 stays a 1N4148: it keeps the transistor biased.
+- **D1, D2 and D3** - click a diode in the schematic (or use the pickers) to swap it while you
+  play, like pulling one out of the breadboard and pushing another in. Mixing kinds gives a more
+  dynamic sound: next to a silicon one, a germanium starts conducting first and the silicon takes
+  over on the big peaks. D1 and D2 are what bias the transistor, so pull both out and it goes
+  (nearly) silent - that's the point. Diodes glow red while they conduct; LEDs show their colour
+  and light up when they conduct.
 - **BYPASS** - true bypass: the clean signal, lined up with the pedal so switching doesn't jump.
   Your DAW's bypass button is the same switch.
 - **MUTE** - silence, for tuning or between songs. (The standalone app opens with the input live:
@@ -34,10 +40,11 @@ while they conduct.
 | LED | infrared, red, yellow, green, blue, white | 1.1-2.8 V |
 | Pulled out | None | - |
 
-The low ones (germanium, Schottky) conduct earlier and squash harder. The LEDs need more voltage
-than this circuit ever puts across them, so they stay dark and sound like an empty hole, just as
-they would on a real breadboard. The models are fitted to each type's usual forward voltage, not
-taken from datasheets, so they're close, not exact.
+The low ones (germanium, Schottky) conduct earlier and squash harder. An LED needs 1.1-2.8 V, so
+next to a silicon diode, or in D3, it never gets enough voltage and stays dark, just as it would on
+a real breadboard. Put LEDs in both D1 and D2 (or one LED with the other spot pulled out) and they
+carry the bias current and light up. The models are fitted to each type's usual forward voltage,
+not taken from datasheets, so they're close, not exact.
 
 Defaults are the 2014 board: 1N4148 everywhere, a fresh battery.
 
@@ -95,4 +102,20 @@ python tools/compare.py spice_out.csv solver_out.csv
 ```
 
 ## License
-MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE). It is built with [JUCE](https://juce.com), which is under its own
+licence (AGPLv3 or a commercial JUCE licence), and the standalone app uses Steinberg's ASIO
+interface bundled with JUCE. Anyone distributing compiled builds must follow those licences too.
+
+---
+
+<br>
+<div align="center">
+© Cursed Entertainment 2026
+</div>
+<br>
+<div align="center">
+<a href="https://cursed-entertainment.itch.io/" target="_blank">
+    <img src="https://github.com/CursedPrograms/cursedentertainment/raw/main/images/logos/logo-wide-grey.png"
+        alt="CursedEntertainment Logo" style="width:250px;">
+</a>
+</div>

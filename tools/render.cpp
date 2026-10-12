@@ -130,7 +130,7 @@ int main (int argc, char* argv[])
     }
 
     const auto& types = diodeTypes();
-    for (const char* spot : { "d1", "d3" })
+    for (const char* spot : { "d1", "d2", "d3" })
     {
         std::cout << "every diode in " << juce::String (spot).toUpperCase() << ":\n";
         for (size_t t = 0; t < types.size(); ++t)
@@ -142,6 +142,15 @@ int main (int argc, char* argv[])
             if (t == 3 || t == 10 || t == 15)                // germanium, red LED, pulled out
                 writeWav (outDir.getChildFile (juce::String ("out_") + spot + "_" + juce::String (types[t].name).replaceCharacter (' ', '_') + ".wav"), r.audio);
         }
+    }
+
+    std::cout << "D1 and D2 both pulled out (nothing biases the transistor):\n";
+    {
+        Fuzz14Processor p;
+        set (p, "d1", 15.0f);
+        set (p, "d2", 15.0f);
+        const auto r = play (p, input);
+        check (finite (r.audio), levels (r.audio));
     }
 
     std::cout << "dying battery:\n";
@@ -195,10 +204,12 @@ int main (int argc, char* argv[])
     }
 
     // the window: a loud chord so the diodes glow
-    for (const auto& [name, d1, d3] : { std::tuple<const char*, int, int> { "gui.png", 0, 0 }, { "gui_led.png", 10, 3 } })
+    for (const auto& [name, d1, d2, d3] : { std::tuple<const char*, int, int, int> { "gui.png", 0, 0, 0 }, { "gui_led.png", 10, 12, 3 },
+                                             { "gui_blue.png", 13, 15, 0 } })
     {
         Fuzz14Processor p;
         set (p, "d1", (float) d1);
+        set (p, "d2", (float) d2);
         set (p, "d3", (float) d3);
         set (p, "input", 12.0f);
         std::unique_ptr<juce::AudioProcessorEditor> editor (p.createEditor());

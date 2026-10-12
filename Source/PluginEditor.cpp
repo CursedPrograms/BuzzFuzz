@@ -17,10 +17,13 @@ Font font (float height, bool bold = false)
     return Font (FontOptions ("Segoe UI", height, bold ? Font::bold : Font::plain));
 }
 
-// how bright a diode looks: 1 uA barely, 1 mA fully
-float brightness (float amps)
+// how bright a diode looks: 1 uA barely, 1 mA fully; an LED shows from 0.1 uA, full by 0.3 mA
+float brightness (float amps, bool led)
 {
-    return amps <= 0.0f ? 0.0f : jlimit (0.0f, 1.0f, (std::log10 (amps) + 6.0f) / 3.0f);
+    if (amps <= 0.0f)
+        return 0.0f;
+    return led ? jlimit (0.0f, 1.0f, (std::log10 (amps) + 7.0f) / 3.5f)
+               : jlimit (0.0f, 1.0f, (std::log10 (amps) + 6.0f) / 3.0f);
 }
 }
 
@@ -119,7 +122,7 @@ Fuzz14Editor::Fuzz14Editor (Fuzz14Processor& p)
     setUp (battery, "battery", batteryAttachment);
     setUp (volume, "volume", volumeAttachment);
     // the diode pickers, grouped by kind
-    for (auto* box : { &d1, &d3 })
+    for (auto* box : { &d1, &d2, &d3 })
     {
         String kind;
         int id = 1;
@@ -134,9 +137,11 @@ Fuzz14Editor::Fuzz14Editor (Fuzz14Processor& p)
         }
         addAndMakeVisible (*box);
     }
-    d1.setTooltip ("D1: which diode sits in the first collector-to-base spot");
+    d1.setTooltip ("D1: collector to base, side by side with D2");
+    d2.setTooltip ("D2: collector to base, side by side with D1 (pull both out and nothing biases the transistor)");
     d3.setTooltip ("D3: which diode clips from the output back to the base");
     d1Attachment = std::make_unique<AudioProcessorValueTreeState::ComboBoxAttachment> (pedal.params, "d1", d1);
+    d2Attachment = std::make_unique<AudioProcessorValueTreeState::ComboBoxAttachment> (pedal.params, "d2", d2);
     d3Attachment = std::make_unique<AudioProcessorValueTreeState::ComboBoxAttachment> (pedal.params, "d3", d3);
 
     for (auto* b : { &bypass, &mute })
@@ -176,21 +181,74 @@ void Fuzz14Editor::resized()
     volume.setBounds (712, 316, 96, 96);
     input.setBounds (40, 342, 96, 96);
     d1.setBounds (150, 118, 132, 24);
+    d2.setBounds (150, 153, 132, 24);
     d3.setBounds (150, 188, 132, 24);
     bypass.setBounds (668, 440, 76, 28);
     mute.setBounds (752, 440, 76, 28);
+}
+
+int Fuzz14Editor::diodeAt (Point<int> p) const
+{
+    for (int d = 0; d < 3; ++d)
+        if (Rectangle<int> (395 - 20, 130 + 35 * d - 15, 40, 30).contains (p))
+            return d;
+    return -1;
+}
+
+void Fuzz14Editor::mouseMove (const MouseEvent& e)
+{
+    setMouseCursor (diodeAt (e.getPosition()) >= 0 ? MouseCursor::PointingHandCursor : MouseCursor::NormalCursor);
+}
+
+void Fuzz14Editor::mouseDown (const MouseEvent& e)
+{
+    if (const auto spot = diodeAt (e.getPosition()); spot >= 0)
+        showDiodeMenu (spot);
+}
+
+void Fuzz14Editor::showDiodeMenu (int spot)
+{
+    static const char* ids[] = { "d1", "d2", "d3" };
+    auto* param = pedal.params.getParameter (ids[spot]);
+    const auto current = diodeType (spot);
+    PopupMenu menu;
+    menu.setLookAndFeel (&look);
+    menu.addSectionHeader ("D" + String (spot + 1));
+    String kind;
+    for (int t = 0; t < (int) diodeTypes().size(); ++t)
+    {
+        const auto& type = diodeTypes()[(size_t) t];
+        if (kind != type.kind)
+        {
+            kind = type.kind;
+            menu.addSectionHeader (kind);
+        }
+        menu.addItem (type.name, true, t == current, [param, t]
+        {
+            param->beginChangeGesture();
+            param->setValueNotifyingHost (param->convertTo0to1 ((float) t));
+            param->endChangeGesture();
+        });
+    }
+    menu.showMenuAsync (PopupMenu::Options().withTargetScreenArea (localAreaToGlobal (Rectangle<int> (375, 115 + 35 * spot, 40, 30))));
+}
+
+int Fuzz14Editor::diodeType (int spot) const
+{
+    static const char* ids[] = { "d1", "d2", "d3" };
+    return jlimit (0, (int) diodeTypes().size() - 1, (int) pedal.params.getRawParameterValue (ids[spot])->load());
 }
 
 void Fuzz14Editor::timerCallback()
 {
     // light up fast, fade like a filament
     const auto fade = [] (float& shown, float target) { shown = target > shown ? target : shown * 0.82f; };
-    for (size_t d = 0; d < 3; ++d)
-        fade (diodeGlow[d], brightness (pedal.diodeCurrent[d].exchange (0.0f)));
+    for (int d = 0; d < 3; ++d)
+        fade (diodeGlow[d], brightness (pedal.diodeCurrent[(size_t) d].exchange (0.0f), diodeTypes()[(size_t) diodeType (d)].light != 0));
     // the input jack glows from 10 mV (still clean) to 100 mV and up (full fuzz)
     const auto volts = pedal.inputVolts.exchange (0.0f);
     fade (inputGlow, volts <= 0.0f ? 0.0f : jlimit (0.0f, 1.0f, std::log10 (volts) + 2.0f));
-    repaint (370, 105, 50, 115);
+    repaint (325, 60, 145, 210);                 // the diodes, blooms and all
     repaint (84, 256, 52, 52);
 }
 
@@ -219,10 +277,6 @@ void Fuzz14Editor::paint (Graphics& g)
     label (volume, "VOLUME", "into the amp");
     label (input, "INPUT", "how hard you hit it");
 
-    // D2 can't be changed: it's what keeps the transistor biased
-    g.setColour (ink);
-    g.setFont (font (13.0f));
-    g.drawText ("1N4148", Rectangle<int> (150, 153, 132, 24), Justification::centredLeft);
     g.setColour (grey);
     g.setFont (font (11.0f, true));
     for (const auto& [y, name] : { std::pair<int, const char*> { 118, "D1" }, { 153, "D2" }, { 188, "D3" } })
@@ -237,28 +291,80 @@ void Fuzz14Editor::paint (Graphics& g)
     g.setColour (Colour (0xff888888));
     g.setFont (font (11.0f));
     g.drawText (String ("Fuzz14 v" FUZZ14_VERSION)
-                    + String (CharPointer_UTF8 ("  \xc2\xb7  Farica\xe2\x98\x86Kimora  (c) Cursed Entertainment")),
+                    + String (CharPointer_UTF8 ("  \xc2\xb7  Farica\xe2\x98\x86Kimora \xc2\xa9 Cursed Entertainment")),
                 Rectangle<int> (skinWidth - 420, skinHeight - 18, 400, 16), Justification::centredRight);
 }
 
 void Fuzz14Editor::paintOverChildren (Graphics& g)
 {
-    // the diodes glow while they conduct (same spots as in tools/draw_schematic.py)
-    const auto diode = [&g] (float cx, float y, float level)
+    // The diodes glow while they conduct (same spots as in tools/draw_schematic.py): a red
+    // "it's working" for ordinary diodes, the LED's own colour with a soft bloom for LEDs.
+    const auto diode = [&g] (float cx, float y, float level, const DiodeType& type)
     {
+        const auto led = type.light != 0;
+        const auto colour = led ? Colour (0xff000000u | type.light) : glow;
+
+        if (type.model.is <= 0.0)                   // pulled out: a gap and two empty holes
+        {
+            g.setColour (paper);
+            g.fillRect (cx - 16.0f, y - 13.0f, 32.0f, 26.0f);
+            g.setColour (ink);
+            for (const auto x : { cx - 14.0f, cx + 14.0f })
+                g.drawEllipse (x - 3.0f, y - 3.0f, 6.0f, 6.0f, 1.5f);
+            return;
+        }
+
+        if (led)                                    // an LED's two little arrows: light coming out
+        {
+            g.setColour (level > 0.01f ? colour.interpolatedWith (Colours::white, 0.3f * level) : grey);
+            for (const auto dx : { 0.0f, 8.0f })
+            {
+                Path arrow;
+                arrow.startNewSubPath (cx + dx, y - 13.0f);
+                arrow.lineTo (cx + dx + 9.0f, y - 22.0f);
+                g.strokePath (arrow, PathStrokeType (1.6f));
+                Path head;
+                head.addTriangle (cx + dx + 11.0f, y - 24.0f, cx + dx + 5.0f, y - 22.0f, cx + dx + 9.0f, y - 18.0f);
+                g.fillPath (head);
+            }
+        }
+        if (led)                                    // the coloured lens, lit or not
+        {
+            Path lens;
+            lens.addTriangle (cx + 9.0f, y - 10.0f, cx + 9.0f, y + 10.0f, cx - 8.0f, y);
+            g.setColour (colour.withAlpha (0.55f));
+            g.fillPath (lens);
+            g.drawLine (cx - 9.0f, y - 10.0f, cx - 9.0f, y + 10.0f, 3.0f);
+        }
         if (level <= 0.01f)
             return;
-        g.setColour (glow.withAlpha (0.35f * level));
-        g.fillEllipse (cx - 18.0f, y - 18.0f, 36.0f, 36.0f);
+
+        // bloom: a soft halo that grows and brightens the harder it conducts
+        const auto radius = led ? 24.0f + 40.0f * level : 16.0f + 10.0f * level;
+        ColourGradient halo (colour.withAlpha ((led ? 0.8f : 0.45f) * level), cx, y,
+                             colour.withAlpha (0.0f), cx + radius, y, true);
+        halo.addColour (0.3, colour.withAlpha ((led ? 0.4f : 0.22f) * level));
+        g.setGradientFill (halo);
+        g.fillEllipse (cx - radius, y - radius, radius * 2.0f, radius * 2.0f);
+
+        // the body, white-hot in the middle when an LED is fully on
         Path p;
         p.addTriangle (cx + 9.0f, y - 10.0f, cx + 9.0f, y + 10.0f, cx - 8.0f, y);
-        g.setColour (glow.withAlpha (level));
+        const auto body = led ? colour.interpolatedWith (Colours::white, 0.5f * level) : colour;
+        g.setColour (body.withAlpha (jmin (1.0f, 0.35f + level)));
         g.fillPath (p);
         g.drawLine (cx - 9.0f, y - 10.0f, cx - 9.0f, y + 10.0f, 3.0f);
+        if (led)
+        {
+            ColourGradient core (Colours::white.withAlpha (0.9f * level), cx, y, Colours::white.withAlpha (0.0f), cx + 10.0f, y, true);
+            g.setGradientFill (core);
+            g.fillEllipse (cx - 10.0f, y - 10.0f, 20.0f, 20.0f);
+        }
     };
-    diode (395.0f, 130.0f, diodeGlow[0]);
-    diode (395.0f, 165.0f, diodeGlow[1]);
-    diode (395.0f, 200.0f, diodeGlow[2]);
+    for (const auto pulledOut : { true, false })     // gaps first, so no glow gets covered
+        for (int d = 0; d < 3; ++d)
+            if (const auto& type = diodeTypes()[(size_t) diodeType (d)]; (type.model.is <= 0.0) == pulledOut)
+                diode (395.0f, 130.0f + 35.0f * (float) d, diodeGlow[d], type);
 
     if (inputGlow > 0.01f)
     {
