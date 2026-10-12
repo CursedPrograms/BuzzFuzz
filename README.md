@@ -20,8 +20,8 @@ See [TODO.md](TODO.md).
                                 │       GND
   OUT jack ─────────────────────┤ collector (pin 1)
                                 │
-                  ┌──►|──►|─────┤   2× 1N4148 in series, stripes toward the base
-                  ├──►|──┤├─────┘   1N4148 + 1nF (grey, 102)
+                  ┌──|◄──|◄─────┤   2× 1N4148 in series, stripes toward the base
+                  ├──|◄──┤├─────┘   1N4148 + 1nF (grey, 102)
                   │
   IN jack ── –┤├+ ┴─────────────── base (pin 2)       MPSA13 Darlington
           2.2µF   │                                   pins from the round side
@@ -29,7 +29,7 @@ See [TODO.md](TODO.md).
                   │
                  GND ───────────── emitter (pin 3)
 ```
-(read the diodes right to left: anode at the collector, stripe at the base)
+(|◄ = a diode, the bar is the stripe: current flows from the collector into the base)
 
 - The 2.2 µF's **+ leg goes to the base**: the base sits at about +1.2 V, the jack at 0 V.
   (The 2014 build has it the other way round; 1.2 V of reverse voltage is small enough that it
