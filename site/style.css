@@ -1,0 +1,316 @@
+/* Fuzz14 - ink on graph paper, like the schematic in the plugin window */
+
+:root {
+  --paper: #fbfbf8;
+  --grid: rgba(29, 29, 31, 0.06);
+  --ink: #1d1d1f;
+  --grey: #666;
+  --line: #d9d9d4;
+  --red: #c0392b;
+  --glow: #ff3b2f;
+
+  --heading: "Space Grotesk", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: var(--paper);
+  /* graph paper: a fine grid with a heavier line every fifth square */
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(rgba(29, 29, 31, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 29, 31, 0.035) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+
+a { color: var(--red); }
+
+main, .masthead, .footer {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ------------------------------------------------------------------ masthead */
+
+.masthead {
+  padding-top: 56px;
+  padding-bottom: 24px;
+  text-align: center;
+}
+
+.logo-diode {
+  width: 120px;
+  height: 60px;
+  stroke: var(--ink);
+  stroke-width: 4;
+  fill: var(--ink);
+}
+
+.logo-diode polygon,
+.logo-diode .bar {
+  animation: conduct 2.4s ease-in-out infinite;
+}
+
+.logo-diode .bar { stroke-width: 6; }
+
+@keyframes conduct {
+  0%, 55%, 100% { fill: var(--ink); stroke: var(--ink); filter: none; }
+  70% { fill: var(--glow); stroke: var(--glow); filter: drop-shadow(0 0 8px var(--glow)); }
+}
+
+h1 {
+  margin: 8px 0 0;
+  font-family: var(--heading);
+  font-size: clamp(64px, 14vw, 140px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+h1 span { color: var(--red); }
+
+.subtitle {
+  margin: 8px 0 0;
+  color: var(--grey);
+  font-size: 18px;
+}
+
+/* ------------------------------------------------------------------ sections */
+
+section { padding: 40px 0; }
+
+h2 {
+  font-family: var(--heading);
+  font-size: 32px;
+  margin: 0 0 16px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 6px;
+}
+
+.ref {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 0 8px;
+  border: 2px solid var(--red);
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+h3 {
+  margin: 0 0 8px;
+  font-family: var(--heading);
+  font-size: 20px;
+}
+
+.small { color: var(--grey); font-size: 14px; }
+
+code {
+  background: rgba(29, 29, 31, 0.07);
+  padding: 1px 5px;
+  border-radius: 3px;
+  word-break: break-all;
+}
+
+/* ------------------------------------------------------------------ hero */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.lead {
+  font-family: var(--heading);
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0 8px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 26px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--heading);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--red);
+  border-color: var(--red);
+  box-shadow: 0 0 18px rgba(255, 59, 47, 0.45);
+}
+
+.button.ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.button.ghost:hover,
+.button.ghost:focus-visible { color: var(--paper); }
+
+.window,
+.sheet {
+  margin: 0;
+  background: #fff;
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 rgba(29, 29, 31, 0.12);
+}
+
+.window img,
+.sheet img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.window figcaption {
+  padding: 8px 12px;
+  border-top: 1px solid var(--line);
+  color: var(--grey);
+  font-size: 13px;
+}
+
+/* ------------------------------------------------------------------ cards */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  padding: 16px 18px;
+}
+
+.card p, .card ol { margin: 0; }
+.card ol { padding-left: 20px; }
+
+/* ------------------------------------------------------------------ diode lab */
+
+.diode-lab {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.diode-controls label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.diode-controls select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.diode-facts {
+  margin: 18px 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+  font-size: 14px;
+}
+
+.diode-facts dt { color: var(--grey); }
+.diode-facts dd { margin: 0; }
+
+#diode-curve {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border: 2px solid var(--ink);
+}
+
+/* ------------------------------------------------------------------ listen */
+
+.clips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.clips figure {
+  margin: 0;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  padding: 10px 12px;
+}
+
+.clips figcaption { font-weight: 600; margin-bottom: 6px; }
+.clips audio { width: 100%; }
+.clips figure.playing { border-color: var(--red); box-shadow: 0 0 14px rgba(255, 59, 47, 0.3); }
+
+/* ------------------------------------------------------------------ specs + footer */
+
+.specs { padding-left: 20px; }
+.specs li { margin-bottom: 8px; }
+
+.footer {
+  padding-top: 32px;
+  padding-bottom: 48px;
+  border-top: 2px solid var(--ink);
+  text-align: center;
+}
+
+.credit {
+  font-family: var(--heading);
+  font-size: 18px;
+  white-space: pre;
+}
+
+.studio img { max-width: 100%; height: auto; }
+
+/* ------------------------------------------------------------------ phones */
+
+/* grid items may shrink below their content (the screenshot, the plot) */
+.hero > *,
+.diode-lab > *,
+.cards > *,
+.clips > * { min-width: 0; }
+
+@media (max-width: 820px) {
+  .hero,
+  .diode-lab { grid-template-columns: minmax(0, 1fr); }
+  .masthead { padding-top: 32px; }
+  h2 { font-size: 26px; }
+  .credit { white-space: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-diode polygon,
+  .logo-diode .bar { animation: none; }
+}

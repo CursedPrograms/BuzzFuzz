@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuzz14 - a 2014 breadboard fuzz, simulated part by part</title>
+<meta name="description" content="Fuzz14: a free fuzz for guitar and electric violin. A one-transistor breadboard fuzz from 2014, solved part by part every sample, with swappable diodes. VST3 and standalone for Windows.">
+<link rel="icon" href="site/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="site/style.css">
+<script src="site/site.js" defer></script>
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-diode" viewBox="0 0 120 60" aria-hidden="true">
+    <line x1="4" y1="30" x2="44" y2="30"/>
+    <polygon points="44,12 44,48 76,30"/>
+    <line class="bar" x1="78" y1="12" x2="78" y2="48"/>
+    <line x1="78" y1="30" x2="116" y2="30"/>
+  </svg>
+  <h1>FUZZ<span>14</span></h1>
+  <p class="subtitle">a 2014 breadboard fuzz, simulated part by part</p>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <p class="lead">One MPSA13 transistor, three 1N4148 diodes and a 1 nF cap,
+        put together on a breadboard in 2014 by adding diodes until it sounded right.</p>
+      <p>Fuzz14 doesn't imitate how it sounds. It <b>solves the circuit</b>, every part, every sample,
+        the way SPICE would. Turn the battery down and the bias really sags. Pull a diode out and
+        the circuit really changes.</p>
+      <div class="actions">
+        <a class="button" href="https://github.com/CursedPrograms/Fuzz14/releases/download/v0.1.0/Fuzz14-v0.1.0-win64.zip">DOWNLOAD</a>
+        <a class="button ghost" href="https://github.com/CursedPrograms/Fuzz14">SOURCE</a>
+      </div>
+      <p class="small">free &middot; Windows 10/11 64-bit &middot; VST3 + standalone app (ASIO) &middot; v0.1.0</p>
+    </div>
+    <figure class="window">
+      <img src="images/fuzz14.png" alt="The Fuzz14 plugin window: the circuit's schematic, with knobs for input, battery and volume, and pickers for diodes D1 and D3" width="1720" height="1040">
+      <figcaption>The window is the schematic. Diodes glow red while they conduct.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2><span class="ref">01</span> Controls</h2>
+    <div class="cards">
+      <article class="card"><h3>INPUT</h3><p>How hard your instrument hits the circuit. It only fuzzes when it's hit hard: for a voice through a mic, try +18 dB. The IN jack glows as you drive it.</p></article>
+      <article class="card"><h3>BATTERY</h3><p>A fresh 9 V down to a dying 6 V, with the internal resistance climbing as it goes.</p></article>
+      <article class="card"><h3>VOLUME</h3><p>What reaches the amp.</p></article>
+      <article class="card"><h3>D1 &amp; D3</h3><p>Swap the diode in those spots while you play. D2 stays a 1N4148: it keeps the transistor biased.</p></article>
+      <article class="card"><h3>BYPASS &amp; MUTE</h3><p>True bypass, lined up with the pedal so it doesn't jump; and silence for tuning. Both fade in 20 ms: no clicks.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="ref">02</span> Pick a diode</h2>
+    <p>Sixteen to choose from. What matters is how much voltage a diode needs before it starts to
+      conduct: the lower it is, the earlier it clips. Pick one to see its curve against the original 1N4148.</p>
+    <div class="diode-lab">
+      <div class="diode-controls">
+        <label for="diode-pick">Diode</label>
+        <select id="diode-pick"></select>
+        <dl class="diode-facts">
+          <dt>Kind</dt><dd id="diode-kind">-</dd>
+          <dt>Turns on at</dt><dd id="diode-vf">-</dd>
+          <dt>In Fuzz14</dt><dd id="diode-note">-</dd>
+        </dl>
+      </div>
+      <canvas id="diode-curve" width="640" height="360" aria-label="Current against voltage for the chosen diode and the 1N4148"></canvas>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="ref">03</span> Listen</h2>
+    <p class="small">A synthetic plucked low E, then an A chord, rendered offline through the plugin. Not a real recording, yet.</p>
+    <div class="clips">
+      <figure><figcaption>Clean</figcaption><audio controls preload="none" src="site/audio/clean.wav"></audio></figure>
+      <figure><figcaption>Fuzz14, as built in 2014</figcaption><audio controls preload="none" src="site/audio/fuzz14.wav"></audio></figure>
+      <figure><figcaption>D3: germanium 1N34A</figcaption><audio controls preload="none" src="site/audio/d3-germanium.wav"></audio></figure>
+      <figure><figcaption>D1: pulled out</figcaption><audio controls preload="none" src="site/audio/d1-pulled-out.wav"></audio></figure>
+      <figure><figcaption>Dying battery</figcaption><audio controls preload="none" src="site/audio/dying-battery.wav"></audio></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="ref">04</span> The circuit</h2>
+    <figure class="sheet">
+      <img src="images/schematic.svg" alt="Schematic: +9 V through 10k to the MPSA13 collector; two 1N4148 diodes from collector to base; a 1 nF cap from collector to the output, with a third 1N4148 from the output back to the base; 2.2 uF from the input to the base; 330 nF from base to ground; emitter to ground" width="860" height="520">
+    </figure>
+    <p>A one-transistor fuzz in the Bazz Fuss family. The two diodes side by side bias the
+      Darlington and squash the signal; the 1 nF on the output lets only the top end through, which
+      is where the buzz comes from; the third diode clips the peaks back into the base.</p>
+  </section>
+
+  <section>
+    <h2><span class="ref">05</span> Plug in</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Standalone</h3>
+        <ol>
+          <li>Unzip, run <code>Fuzz14.exe</code>.</li>
+          <li>Options &gt; Audio/MIDI Settings: <b>ASIO</b>, your interface, the input your instrument is in, buffer 64-128.</li>
+          <li>The input is live from the start. Headphones, or keep the mic away from the speakers.</li>
+        </ol>
+      </article>
+      <article class="card">
+        <h3>VST3</h3>
+        <ol>
+          <li>Copy <code>Fuzz14.vst3</code> to <code>C:\Program Files\Common Files\VST3</code>.</li>
+          <li>Rescan plugins in your DAW.</li>
+          <li>Put it on a mono track. It comes out stereo.</li>
+        </ol>
+      </article>
+      <article class="card">
+        <h3>"Windows protected your PC"?</h3>
+        <p>The files aren't code-signed, so SmartScreen may warn you. Click <b>More info &gt; Run anyway</b>.
+          Only download it from this page or the GitHub release.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="ref">06</span> Under the hood</h2>
+    <ul class="specs">
+      <li><b>Solver:</b> modified nodal analysis like SPICE: Newton iterations every sample, trapezoidal capacitors, Shockley diodes, Ebers-Moll transistors (the MPSA13 is two of them).</li>
+      <li><b>Checked against ngspice 47:</b> same netlist, same input; the bias matches to 5 digits and the waveforms within 0.24 %.</li>
+      <li><b>2x oversampled</b> at 44.1 / 48 kHz, about 12 % of one CPU core.</li>
+      <li><b>pluginval</b> strictness 10: passed.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="footer">
+  <p class="credit">Farica&#9734;Kimora&nbsp;&nbsp;(c) Cursed Entertainment</p>
+  <a class="studio" href="https://cursed-entertainment.itch.io/">
+    <img src="https://github.com/CursedPrograms/cursedentertainment/raw/main/images/logos/logo-wide-grey.png" alt="Cursed Entertainment" width="250">
+  </a>
+  <p class="small"><a href="https://github.com/CursedPrograms/Fuzz14">GitHub</a> &middot; MIT licence &middot; built with JUCE</p>
+</footer>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
-#include "BuzzFuzz.h"
+#include "Fuzz14.h"
 
-BuzzFuzz::BuzzFuzz (const Settings& s)
+Fuzz14::Fuzz14 (const Settings& s)
 {
     auto& c = circuit;
     in = c.addNode ("in");
@@ -22,10 +22,10 @@ BuzzFuzz::BuzzFuzz (const Settings& s)
     c.addNpn (collector, base, darlington, half);
     c.addNpn (collector, darlington, 0, half);
 
-    c.addDiode (collector, base, d1n4148);        // two side by side
-    c.addDiode (collector, base, d1n4148);
+    d1 = c.addDiode (collector, base, d1n4148);   // two side by side
+    d2 = c.addDiode (collector, base, d1n4148);
     c.addCapacitor (collector, output, 1e-9);     // 102K63
-    c.addDiode (output, base, d1n4148);
+    d3 = c.addDiode (output, base, d1n4148);
 
     c.addResistor (output, 0, 1e6);               // the amp's input
 }

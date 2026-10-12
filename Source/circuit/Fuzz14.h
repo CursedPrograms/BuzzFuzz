@@ -13,7 +13,7 @@
 //                                                                      330nF
 //                                                                       GND ── emitter
 
-struct BuzzFuzz
+struct Fuzz14
 {
     struct Settings
     {
@@ -22,9 +22,10 @@ struct BuzzFuzz
         double sourceOhms = 10000.0;      // what's driving the input (pickup)
     };
 
-    explicit BuzzFuzz (const Settings& s = {});
+    explicit Fuzz14 (const Settings& s = {});
 
     Circuit circuit;
     int input = 0, battery = 0;
     int in = 0, base = 0, collector = 0, rail = 0, output = 0;
+    int d1 = 0, d2 = 0, d3 = 0;           // diode indices, for Circuit::setDiode
 };

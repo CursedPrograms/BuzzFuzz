@@ -1,7 +1,7 @@
-// Runs the circuit through the real-time solver with the same input as spice/buzz_fuzz.cir
+// Runs the circuit through the real-time solver with the same input as spice/fuzz14.cir
 // and writes solver_out.csv (time, v(in), v(b), v(c), v(out)) for tools/compare.py.
 //   verify <amplitude volts> <frequency Hz> <out.csv>
-#include "../Source/circuit/BuzzFuzz.h"
+#include "../Source/circuit/Fuzz14.h"
 #include <chrono>
 #include <cstdio>
 #include <cstdlib>
@@ -13,7 +13,7 @@ int main (int argc, char* argv[])
     const char* path = argc > 3 ? argv[3] : "solver_out.csv";
     const auto rate = 192000.0, seconds = 0.5;
 
-    BuzzFuzz fuzz;
+    Fuzz14 fuzz;
     auto& c = fuzz.circuit;
     c.prepare (rate);
     std::printf ("op: v(b)=%.6f v(c)=%.6f v(out)=%.6f v(e1)=%.6f v(vcc)=%.6f\n", c.voltage (fuzz.base),

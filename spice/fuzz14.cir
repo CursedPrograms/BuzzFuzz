@@ -1,6 +1,6 @@
 * The 2014 breadboard fuzz - reference for the real-time solver
 * Same simplified models as Source/circuit (models.lib has the full ones for comparison).
-* Run: ngspice -b buzz_fuzz.cir   (writes spice_out.csv)
+* Run: ngspice -b fuzz14.cir   (writes spice_out.csv)
 
 .param amp=0.1 freq=196
 

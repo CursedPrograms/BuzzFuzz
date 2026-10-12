@@ -34,12 +34,15 @@ public:
 
     void addResistor (int a, int b, double ohms);
     void addCapacitor (int a, int b, double farads);
-    void addDiode (int anode, int cathode, const DiodeModel&);
+    int addDiode (int anode, int cathode, const DiodeModel&);          // returns its index for setDiode()
     void addNpn (int collector, int base, int emitter, const BjtModel&);
     // a source from node to ground; returns its index for setSource()
     int addSource (int node, double volts, double seriesOhms);
 
     void setSource (int index, double volts);
+    void setSourceOhms (int index, double ohms);
+    void setDiode (int index, const DiodeModel& m)  { diodes[(size_t) index].m = m; }
+    double diodeCurrent (int index) const;
     void setResistor (int index, double ohms);
     int resistorCount() const { return (int) resistors.size(); }
 

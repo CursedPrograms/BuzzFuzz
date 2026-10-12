@@ -42,7 +42,18 @@ int Circuit::node (const std::string& name) const
 
 void Circuit::addResistor (int a, int b, double ohms)        { resistors.push_back ({ a, b, 1.0 / ohms }); }
 void Circuit::addCapacitor (int a, int b, double farads)     { capacitors.push_back ({ a, b, farads }); }
-void Circuit::addDiode (int a, int k, const DiodeModel& m)   { diodes.push_back ({ a, k, m }); }
+int Circuit::addDiode (int a, int k, const DiodeModel& m)
+{
+    diodes.push_back ({ a, k, m });
+    return (int) diodes.size() - 1;
+}
+
+double Circuit::diodeCurrent (int index) const
+{
+    const auto& d = diodes[(size_t) index];
+    const auto vd = voltage (d.a) - voltage (d.k);
+    return d.m.is * (std::exp (std::min (vd / (d.m.n * thermalVoltage), 80.0)) - 1.0);
+}
 void Circuit::addNpn (int c, int b, int e, const BjtModel& m) { npns.push_back ({ c, b, e, m }); }
 
 int Circuit::addSource (int node, double volts, double seriesOhms)
@@ -52,6 +63,7 @@ int Circuit::addSource (int node, double volts, double seriesOhms)
 }
 
 void Circuit::setSource (int index, double volts)   { sources[(size_t) index].volts = volts; }
+void Circuit::setSourceOhms (int index, double ohms) { sources[(size_t) index].g = 1.0 / ohms; }
 void Circuit::setResistor (int index, double ohms)  { resistors[(size_t) index].g = 1.0 / ohms; }
 
 void Circuit::stamp (int row, int col, double value)

@@ -1,4 +1,4 @@
-# Buzz Fuzz
+# Fuzz14
 
 A real-time circuit emulation of a fuzz pedal first built on a breadboard in 2014: one MPSA13
 Darlington transistor as a common-emitter amp, with 1N4148 diodes in the feedback clipping it
@@ -6,11 +6,57 @@ Darlington transistor as a common-emitter amp, with 1N4148 diodes in the feedbac
 
 Farica☆Kimora  (c) Cursed Entertainment
 
-**Status: work in progress.** The circuit solver works; the plugin (VST3 + standalone) is next.
-See [TODO.md](TODO.md).
+A VST3 plugin and standalone app (with ASIO) for Windows, for guitar or electric violin. The
+window is the schematic: the knobs sit next to the parts they belong to, and the diodes glow red
+while they conduct.
+
+![Fuzz14](images/fuzz14.png)
+
+## Controls
+- **INPUT** - how hard the instrument hits the circuit (0 dB: full scale = 1 V at the input jack).
+  Like a real one-transistor fuzz it only fuzzes when it's hit hard: a pickup gives 0.1-1 V, a mic
+  preamp often only 0.01-0.03 V, so for a voice turn INPUT up to +18 dB or more. The IN jack glows
+  red as you drive it.
+- **BATTERY** - a fresh 9 V down to a dying 6 V, with the internal resistance climbing as it goes.
+- **VOLUME** - what reaches the amp.
+- **D1 and D3** - swap the diode in those spots while you play, like pulling one out of the
+  breadboard and pushing another in. D2 stays a 1N4148: it keeps the transistor biased.
+- **BYPASS** - true bypass: the clean signal, lined up with the pedal so switching doesn't jump.
+  Your DAW's bypass button is the same switch.
+- **MUTE** - silence, for tuning or between songs. (The standalone app opens with the input live:
+  no "muted to avoid feedback" bar. Use headphones or keep the mic away from the speakers.)
+
+| Kind | Diodes | Forward voltage (about, at 1 mA) |
+|---|---|---|
+| Silicon | **1N4148** (the original), 1N914, 1N4001 | 0.57-0.61 V |
+| Germanium | 1N34A, OA90, 1N270 | 0.28-0.32 V |
+| Schottky | BAT41, BAT85, 1N5817 | 0.20-0.45 V |
+| LED | infrared, red, yellow, green, blue, white | 1.1-2.8 V |
+| Pulled out | None | - |
+
+The low ones (germanium, Schottky) conduct earlier and squash harder. The LEDs need more voltage
+than this circuit ever puts across them, so they stay dark and sound like an empty hole, just as
+they would on a real breadboard. The models are fitted to each type's usual forward voltage, not
+taken from datasheets, so they're close, not exact.
+
+Defaults are the 2014 board: 1N4148 everywhere, a fresh battery.
+
+## Install
+Download the zip from [Releases](https://github.com/CursedPrograms/Fuzz14/releases):
+- `Fuzz14.exe` - standalone; pick your audio interface (ASIO) in Options > Audio/MIDI Settings.
+- `Fuzz14.vst3` - copy to `C:\Program Files\Common Files\VST3` and rescan in your DAW.
+
+It solves the whole circuit every sample, 2x oversampled at 44.1 / 48 kHz: about 12 % of one
+CPU core.
+
+## Build
+Needs CMake and Visual Studio 2022 ("Desktop development with C++"). Run `build.bat`; the results
+land in `dist\`. JUCE 8 is downloaded the first time. `tools/render.cpp` plays a synthetic guitar
+through every diode and renders the window; `tools/draw_schematic.py` draws the schematic (and
+the plugin's skin, `Source/skin.svg`).
 
 ## The circuit
-![Buzz Fuzz schematic](images/schematic.svg)
+![Fuzz14 schematic](images/schematic.svg)
 
 (PNG version: [images/schematic.png](images/schematic.png))
 
@@ -38,13 +84,13 @@ Wired like this on the board (MPSA13 pins seen from the round side):
 ## The solver
 `Source/circuit` is a small modified-nodal-analysis solver (Newton iterations, trapezoidal
 capacitors, Shockley diodes, Ebers-Moll transistors) that runs the whole circuit sample by
-sample. Against ngspice 47 with the same netlist (`spice/buzz_fuzz.cir`) it matches within
+sample. Against ngspice 47 with the same netlist (`spice/fuzz14.cir`) it matches within
 0.24 % of the signal over several levels and pitches.
 
 ```
 cmake -S . -B build && cmake --build build --config Release
-ngspice -b spice/buzz_fuzz.cir          # writes spice_out.csv
-build/Release/verify.exe                  # writes the solver's output
+ngspice -b spice/fuzz14.cir          # writes spice_out.csv
+build/Release/verify.exe             # writes the solver's output
 python tools/compare.py spice_out.csv solver_out.csv
 ```
 
