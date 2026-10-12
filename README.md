@@ -17,9 +17,9 @@ See [TODO.md](TODO.md).
 
 ```
                           +9V ──┬────────┐
-                                │      1µF   (rail cap)
-                               10k       │
-                                │       GND
+                                │        ═  + 1µF  rail cap (electrolytic)
+                               10k       │  – to pin 3 / GND
+                                │        ┴
   OUT jack ─────────────────────┤ collector (pin 1)
                                 │
                   ┌──|◄──|◄─────┤   2× 1N4148 in series, stripes toward the base
@@ -29,7 +29,7 @@ See [TODO.md](TODO.md).
           2.2µF   │                                   pins from the round side
                 330nF (blue, 334)                    1 C · 2 B · 3 E
                   │
-                 GND ───────────── emitter (pin 3)
+                 GND ───────────── emitter (pin 3), rail cap –
 ```
 (|◄ = a diode, the bar is the stripe: current flows from the collector into the base)
 
