@@ -27,7 +27,8 @@
 <text xml:space="preserve" x="730" y="184" font-size="12" text-anchor="start" fill="#666" font-weight="normal" font-style="normal">to amp</text>
 <polyline points="480,170 480,300" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="455" cy="320" r="78" fill="none" stroke="#999" stroke-width="1.5" stroke-dasharray="5 4"/>
-<text xml:space="preserve" x="455" y="418" font-size="13" text-anchor="middle" fill="#666" font-weight="normal" font-style="normal">MPSA13 (Darlington)</text>
+<text xml:space="preserve" x="388" y="408" font-size="13" text-anchor="end" fill="#666" font-weight="normal" font-style="normal">MPSA13</text>
+<text xml:space="preserve" x="388" y="424" font-size="12" text-anchor="end" fill="#666" font-weight="normal" font-style="normal">(Darlington)</text>
 <polyline points="400,262 400,302" fill="none" stroke="#1d1d1f" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="400,272 425,252" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="425,252 480,252" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
@@ -46,7 +47,7 @@
 <polyline points="476,442 484,442" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <text xml:space="preserve" x="492" y="240" font-size="12" text-anchor="start" fill="#c0392b" font-weight="normal" font-style="normal">1 C</text>
 <text xml:space="preserve" x="392" y="272" font-size="12" text-anchor="end" fill="#c0392b" font-weight="normal" font-style="normal">2 B</text>
-<text xml:space="preserve" x="492" y="395" font-size="12" text-anchor="start" fill="#c0392b" font-weight="normal" font-style="normal">3 E</text>
+<text xml:space="preserve" x="492" y="412" font-size="12" text-anchor="start" fill="#c0392b" font-weight="normal" font-style="normal">3 E</text>
 <polyline points="300,282 400,282" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="300" cy="282" r="4" fill="#1d1d1f"/>
 <polyline points="480,170 440,170" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>

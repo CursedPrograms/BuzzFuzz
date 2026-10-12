@@ -13,6 +13,8 @@ See [TODO.md](TODO.md).
 ## The circuit
 ![Buzz Fuzz schematic](images/schematic.svg)
 
+(PNG version: [images/schematic.png](images/schematic.png))
+
 ```
                           +9V ──┬────────┐
                                 │      1µF   (rail cap)
